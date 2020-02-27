@@ -15,6 +15,9 @@ public class Cliente {
         
         c1 = f1.crearCarrera(100);
         c2 = f2.crearCarrera(100);
+        
+        f1.comenzarCarrera(c1);
+        f2.comenzarCarrera(c2);
     }
     
 }

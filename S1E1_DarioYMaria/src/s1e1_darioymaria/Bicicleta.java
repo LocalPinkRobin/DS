@@ -17,6 +17,12 @@ public abstract class Bicicleta extends Thread{
     public void run(){
         try {
             this.sleep(60000);
+            
+        /*--------------------------------------------------------------------*/
+        String mensaje = "Bicicleta " + Integer.toString(this.idBicicleta) + " arranca";
+        System.out.println(mensaje);
+        /*--------------------------------------------------------------------*/
+        
         } catch (InterruptedException ex) {
             Logger.getLogger(Bicicleta.class.getName()).log(Level.SEVERE, null, ex);
         }
