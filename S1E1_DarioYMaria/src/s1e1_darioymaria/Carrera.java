@@ -3,16 +3,17 @@ package s1e1_darioymaria;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public abstract class Carrera {
+public abstract class Carrera extends Thread {
    
     ArrayList <Bicicleta> bicicletas;
     float retirados;
     
     
-    Carrera ( int n){
+    Carrera (int n){
         bicicletas = new ArrayList<>();
-        
     }
     
     protected void retira(float f){
@@ -24,10 +25,14 @@ public abstract class Carrera {
             bicicletas.get(auxiliar).stop();
             bicicletas.remove(auxiliar);
         }
-        
     }
     
-    public void comenzar() throws InterruptedException {
+    public void comenzar() {
+        this.start();
+    }
+    
+    @Override
+    public void run() {
         int rand = ThreadLocalRandom.current().nextInt(20,50000);
         for (Bicicleta b : bicicletas) {
             b.start();
@@ -37,11 +42,18 @@ public abstract class Carrera {
         System.out.println("Carrera iniciada");
         /*--------------------------------------------------------------------*/
         
-        Thread.sleep(rand); // Hace esperar al hilo actual rand milisegundos
-        this.retira(retirados);
+        try {
+            Thread.sleep(rand); // Hace esperar al hilo actual rand milisegundos
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Carrera.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        this.retira(this.retirados);
         
         /*--------------------------------------------------------------------*/
-        System.out.println("Corredores retirados");
+        int segundos = rand/1000;
+        String mensaje = "Bicicletas forzosamente retiradas a los " + segundos + " segundos";
+        System.out.println(mensaje);
         /*--------------------------------------------------------------------*/
     }
 }
