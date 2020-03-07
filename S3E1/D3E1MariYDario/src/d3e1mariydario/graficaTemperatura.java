@@ -4,18 +4,35 @@
  * Autores: María Sánchez Marcos y Darío Megías Guerrero
  */
 package d3e1mariydario;
+import java.util.Observer;
+import java.util.Observable;
 
 /**
  *
  * @author dario
  */
-public class graficaTemperatura extends javax.swing.JFrame {
+public class graficaTemperatura extends javax.swing.JFrame implements Observer{
 
     /**
      * Creates new form graficaTemperatura
      */
+    
     public graficaTemperatura() {
         initComponents();
+        Temperatura temp;
+        temp = new Temperatura();
+        temp.addObserver(this);
+    }
+    
+    @Override
+    public void update(Observable obs, Object arg){
+        if (obs instanceof Temperatura) { 
+            celsios.setText(arg.toString());
+            Double fares = (((Double)arg)*9/5)+32;
+            fare.setText(fares.toString());
+            repaint();
+            revalidate();
+        }
     }
 
     /**
@@ -27,17 +44,62 @@ public class graficaTemperatura extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        celsios = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        fare = new javax.swing.JTextArea();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Temperatura Cº:");
+
+        jLabel2.setText("Temperatura F:");
+
+        celsios.setBackground(new java.awt.Color(169, 232, 229));
+        celsios.setColumns(20);
+        celsios.setRows(5);
+        jScrollPane1.setViewportView(celsios);
+
+        fare.setBackground(new java.awt.Color(169, 232, 229));
+        fare.setColumns(20);
+        fare.setRows(5);
+        jScrollPane2.setViewportView(fare);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(81, 81, 81))))
         );
 
         pack();
@@ -76,8 +138,15 @@ public class graficaTemperatura extends javax.swing.JFrame {
                 new graficaTemperatura().setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea celsios;
+    private javax.swing.JTextArea fare;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
