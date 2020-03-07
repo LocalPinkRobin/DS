@@ -8,7 +8,8 @@ package d3e1mariydario;
 public class D3E1MariYDario {
 
     public static void main(String[] args) {
-       System.out.println("Hola");
+       Temperatura temp = new Temperatura();
+       temp.start();
     }
     
 }

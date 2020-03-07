@@ -5,6 +5,8 @@
  */
 package d3e1mariydario;
 
+import java.util.Observer;
+
 /**
  *
  * @author dario
