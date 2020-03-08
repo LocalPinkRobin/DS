@@ -2,7 +2,9 @@
 #define VISITANTEPRECIODETALLE_H
 
 #include "visitanteequipo.h"
+#include <string>
 
+using namespace std;
 
 class VisitantePrecioDetalle : public VisitanteEquipo
 {

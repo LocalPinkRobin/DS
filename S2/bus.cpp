@@ -1,4 +1,5 @@
 #include "bus.h"
+#include "visitanteequipo.h"
 
 Bus::Bus(int p, string n):ComponenteEquipo(p,n){
 

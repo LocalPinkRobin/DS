@@ -2,6 +2,7 @@
 #define EQUIPO_H
 
 #include <vector>
+
 #include "visitanteequipo.h"
 
 class Equipo

@@ -2,7 +2,8 @@
 #define COMPONENTEEQUIPO_H
 
 #include <string>
-#include "equipo.h"
+
+class VisitanteEquipo;
 
 using namespace std;
 
