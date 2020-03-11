@@ -17,5 +17,7 @@ void VisitantePrecio::VisitarBus(Bus * b){
 }
 
 int VisitantePrecio::getPrecio(){
-    return(precio);
+    int resultado = precio;
+    precio = 0;
+    return resultado;
 }
