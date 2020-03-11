@@ -11,13 +11,13 @@ import java.util.Observable;
  *
  * @author dario
  */
-public class graficaTemperatura extends javax.swing.JFrame implements Observer{
+public class PantallaTemperatura extends javax.swing.JFrame implements Observer{
 
     /**
      * Creates new form graficaTemperatura
      */
     
-    public graficaTemperatura() {
+    public PantallaTemperatura() {
         initComponents();
         Temperatura temp;
         temp = new Temperatura();
@@ -122,20 +122,23 @@ public class graficaTemperatura extends javax.swing.JFrame implements Observer{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(graficaTemperatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantallaTemperatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(graficaTemperatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantallaTemperatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(graficaTemperatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantallaTemperatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(graficaTemperatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantallaTemperatura.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new graficaTemperatura().setVisible(true);
+                new PantallaTemperatura().setVisible(true);
             }
         });
 

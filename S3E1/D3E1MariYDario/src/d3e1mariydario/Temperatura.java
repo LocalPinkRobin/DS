@@ -19,6 +19,8 @@ public class Temperatura extends Observable {
     public void setState(Double temperatura) {
         this.temperatura = temperatura;
         setChanged();
+        System.out.println(Double.toString(this.temperatura));
+        notifyObservers();
     }
 
     public Double getState() {
@@ -29,6 +31,12 @@ public class Temperatura extends Observable {
         this.hebra = new MiHebra();
         hebra.start();
     }
+    
+    @Override
+    public void notifyObservers() {
+        super.notifyObservers();
+        System.out.println("Notified all observers");
+    }
 
     public class MiHebra extends Thread {
         @Override
@@ -36,7 +44,7 @@ public class Temperatura extends Observable {
             Double nuevaTemperatura;
             while (true){
                 try {
-                    sleep(1000);
+                    sleep(3000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Temperatura.class.getName()).log(Level.SEVERE, null, ex);
                 }
