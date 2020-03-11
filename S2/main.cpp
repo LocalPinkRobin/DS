@@ -28,14 +28,18 @@ int main() {
     e1.aceptar(v1);
     e1.aceptar(v2);
 
-    cout << v1->getPrecio();
-    cout << v2->getPrecio();
+    cout << "Precio total equipo 1:" << endl;
+    cout << v1->getPrecio() << "€" << endl;
+    cout << "Precio detallado equipo 1:" << endl;
+    cout << v2->getPrecio() << endl;
 
     e2.aceptar(v1);
     e2.aceptar(v2);
 
-    cout << v1->getPrecio();
-    cout << v2->getPrecio();
+    cout << "Precio total equipo 2:" << endl;
+    cout << v1->getPrecio() << "€" << endl;
+    cout << "Precio detallado equipo 2:" << endl;
+    cout << v2->getPrecio() << endl;
 
 
 }
