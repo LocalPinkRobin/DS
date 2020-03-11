@@ -4,14 +4,13 @@
  * Autores: María Sánchez Marcos y Darío Megías Guerrero
  */
 package d3e1mariydario;
-import java.util.Observer;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- *
- * @author dario
- */
-public class PantallaTemperatura extends javax.swing.JFrame implements Observer{
+public class PantallaTemperatura extends javax.swing.JFrame {
+    
+    private Observable obs ;
 
     /**
      * Creates new form graficaTemperatura
@@ -19,19 +18,45 @@ public class PantallaTemperatura extends javax.swing.JFrame implements Observer{
     
     public PantallaTemperatura() {
         initComponents();
-        Temperatura temp;
-        temp = new Temperatura();
-        temp.addObserver(this);
     }
     
-    @Override
-    public void update(Observable obs, Object arg){
-        if (obs instanceof Temperatura) { 
-            celsios.setText(arg.toString());
-            Double fares = (((Double)arg)*9/5)+32;
-            fare.setText(fares.toString());
-            repaint();
-            revalidate();
+    private void actualizarPantalla(Double celsius, Double fahrenheit) {
+        gradosCelsius.setText(Double.toString(celsius));
+        gradosFahrenheit.setText(Double.toString(fahrenheit));
+    }
+    
+    public void setObservable(Observable obs) {
+        this.obs = obs;
+    }
+    
+    public void start() {
+        MiHilo hilo = new MiHilo();
+        hilo.start();
+    }
+    
+    public class MiHilo extends Thread {
+        @Override
+        public void run() {
+            Double celsius;
+            Double fahrenheit;
+            
+            while (true) {
+                if (obs instanceof Temperatura) {
+                celsius = ((Temperatura) obs).getState();
+                fahrenheit = aFahrenheit(celsius);
+                actualizarPantalla(celsius,fahrenheit);
+            }
+                
+                try {
+                    sleep(500);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(PantallaTemperatura.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
+        Double aFahrenheit(Double celsius) {
+            return ((celsius*9/5)+32);
         }
     }
 
@@ -46,10 +71,10 @@ public class PantallaTemperatura extends javax.swing.JFrame implements Observer{
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        celsios = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        fare = new javax.swing.JTextArea();
+        gradosCelsius = new javax.swing.JLabel();
+        gradosFahrenheit = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,15 +82,13 @@ public class PantallaTemperatura extends javax.swing.JFrame implements Observer{
 
         jLabel2.setText("Temperatura F:");
 
-        celsios.setBackground(new java.awt.Color(169, 232, 229));
-        celsios.setColumns(20);
-        celsios.setRows(5);
-        jScrollPane1.setViewportView(celsios);
+        gradosCelsius.setText("jLabel3");
 
-        fare.setBackground(new java.awt.Color(169, 232, 229));
-        fare.setColumns(20);
-        fare.setRows(5);
-        jScrollPane2.setViewportView(fare);
+        gradosFahrenheit.setText("jLabel4");
+
+        jLabel5.setText("ºC");
+
+        jLabel6.setText("ºF");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,30 +99,32 @@ public class PantallaTemperatura extends javax.swing.JFrame implements Observer{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(gradosCelsius)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(gradosFahrenheit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(81, 81, 81))))
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(gradosCelsius)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(gradosFahrenheit)
+                    .addComponent(jLabel6))
+                .addGap(81, 81, 81))
         );
 
         pack();
@@ -145,11 +170,11 @@ public class PantallaTemperatura extends javax.swing.JFrame implements Observer{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea celsios;
-    private javax.swing.JTextArea fare;
+    private javax.swing.JLabel gradosCelsius;
+    private javax.swing.JLabel gradosFahrenheit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }

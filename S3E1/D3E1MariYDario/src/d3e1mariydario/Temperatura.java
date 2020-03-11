@@ -11,10 +11,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Temperatura extends Observable {
-    private Double temperatura;
+    
+    private Double  temperatura;
     private MiHebra hebra;
+    private long    refreshTime;
 
-    public Temperatura() {}
+    public Temperatura(long refreshTime) {
+        this.refreshTime = refreshTime;
+    }
 
     public void setState(Double temperatura) {
         this.temperatura = temperatura;
@@ -42,14 +46,16 @@ public class Temperatura extends Observable {
         @Override
         public void run() {
             Double nuevaTemperatura;
+            
             while (true){
+                nuevaTemperatura = getRandom();
+                setState(nuevaTemperatura);
+                
                 try {
-                    sleep(3000);
+                    sleep(refreshTime);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Temperatura.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                nuevaTemperatura = getRandom();
-                setState(nuevaTemperatura);
             }
         }
         public double getRandom() {
