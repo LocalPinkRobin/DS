@@ -16,7 +16,7 @@ public class D3E1MariYDario {
         boton.setVisible(true);
         pantalla.setVisible(true);
         
-        Temperatura temp = new Temperatura(100);
+        Temperatura temp = new Temperatura(2000);
         temp.addObserver(grafica);
         temp.addObserver(boton);
         
