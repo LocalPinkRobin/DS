@@ -122,7 +122,7 @@ public class FrameBotones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void acelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acelerarActionPerformed
-        if (!frenar.isSelected()) {
+        if (encender.isSelected() && !frenar.isSelected()) {
             if (acelerar.isSelected()) {
                 acelerar.setText("Soltar acelerador");
                 acelerar.setForeground(Color.red);
@@ -133,6 +133,7 @@ public class FrameBotones extends javax.swing.JFrame {
             } else {
                 acelerar.setText("ACELERAR");
                 acelerar.setForeground(Color.black);
+                estado.setText("ENCENDIDO");
             }
 
             repaint();
@@ -141,7 +142,7 @@ public class FrameBotones extends javax.swing.JFrame {
     }//GEN-LAST:event_acelerarActionPerformed
 
     private void frenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frenarActionPerformed
-        if (!acelerar.isSelected()) {
+        if (encender.isSelected() && !acelerar.isSelected()) {
             if (frenar.isSelected()) {
                 frenar.setText("Soltar freno");
                 frenar.setForeground(Color.red);
@@ -152,6 +153,7 @@ public class FrameBotones extends javax.swing.JFrame {
             } else {
                 frenar.setText("FRENAR");
                 frenar.setForeground(Color.black);
+                estado.setText("ENCENDIDO");
             }
 
             repaint();
