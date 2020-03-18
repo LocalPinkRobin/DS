@@ -11,8 +11,8 @@ public class Cliente {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        RepercutirRozamiento filtro1 = new RepercutirRozamiento();
-        CalcularVelocidad filtra2 = new CalcularVelocidad();
+        FrameBotones panel = new FrameBotones();
+        panel.setVisible(true);
     }
     
 }
