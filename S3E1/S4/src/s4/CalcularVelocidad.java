@@ -5,20 +5,18 @@
  */
 package s4;
 
-public class CalcularVelocidad extends Filtro {
+public class CalcularVelocidad implements Filtro {
     
-    public CalcularVelocidad() {
-        setIncrementoVelocidad(-100);
-    }
+    public double incrementoVelocidad = -100;
     
     @Override
     public double ejecutar(double revoluciones, EstadoMotor estadoMotor) {
         double resultado = revoluciones;
         
         if (estadoMotor == EstadoMotor.ACELERANDO) {
-            resultado -= getIncrementoVelocidad();
+            resultado -= this.incrementoVelocidad;
         } else if (estadoMotor == EstadoMotor.FRENANDO) {
-            resultado += getIncrementoVelocidad();
+            resultado += incrementoVelocidad;
         }
         
         return resultado;

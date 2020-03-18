@@ -5,10 +5,17 @@
  */
 package s4;
 
-public class RepercutirRozamiento extends Filtro {
+public class RepercutirRozamiento implements Filtro {
+    
+    private double rozamiento = 10;
     
     @Override
     public double ejecutar(double revoluciones, EstadoMotor estadoMotor) {
+        double aux = revoluciones - this.rozamiento;
         
+        if (aux < 0) 
+            aux = 0;
+        
+        return aux;
     }
 }

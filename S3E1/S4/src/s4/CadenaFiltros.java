@@ -5,6 +5,22 @@
  */
 package s4;
 
+import java.util.ArrayList;
+
 public class CadenaFiltros {
+    ArrayList<Filtro> filtros;
     
+    public CadenaFiltros() {
+        filtros = new ArrayList<>();
+    }
+    
+    public void addFiltro(Filtro filtro) {
+        filtros.add(filtro);
+    }
+    
+    public void ejecutar(double revoluciones, EstadoMotor estadoMotor) {
+        for (Filtro f : filtros) {
+            revoluciones = f.ejecutar(revoluciones, estadoMotor);
+        }
+    }
 }

@@ -5,21 +5,7 @@
  */
 package s4;
 
-public abstract class Filtro {
-    
-    public enum EstadoMotor {
-        ENCENDIDO, APAGADO, ACELERANDO, FRENANDO;
-    }
-    
-    private double incrementoVelocidad;
+public interface Filtro {
     
     public abstract double ejecutar(double revoluciones, EstadoMotor estadoMotor);
-    
-    public double getIncrementoVelocidad() {
-        return this.incrementoVelocidad;
-    }
-    
-    public void setIncrementoVelocidad(double incrementoVelocidad) {
-        this.incrementoVelocidad = incrementoVelocidad;
-    }
 }

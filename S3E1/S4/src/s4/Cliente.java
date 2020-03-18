@@ -11,7 +11,8 @@ public class Cliente {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        RepercutirRozamiento filtro1 = new RepercutirRozamiento();
+        CalcularVelocidad filtra2 = new CalcularVelocidad();
     }
     
 }
