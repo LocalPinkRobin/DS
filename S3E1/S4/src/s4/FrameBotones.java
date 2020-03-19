@@ -7,17 +7,28 @@ package s4;
 
 import java.awt.Color;
 
-/**
- *
- * @author dario
- */
 public class FrameBotones extends javax.swing.JFrame {
+    
+    private double revoluciones = 0;
+    private EstadoMotor estadoMotor = EstadoMotor.APAGADO;
 
     /**
      * Creates new form FrameBotones
      */
     public FrameBotones() {
         initComponents();
+    }
+    
+    public double getRevoluciones() {
+        return revoluciones;
+    }
+    
+    public EstadoMotor getEstadoMotor() {
+        return estadoMotor;
+    }
+    
+    public void setRevoluciones(double revoluciones) {
+        this.revoluciones = revoluciones;
     }
 
     /**
@@ -127,13 +138,16 @@ public class FrameBotones extends javax.swing.JFrame {
                 acelerar.setText("Soltar acelerador");
                 acelerar.setForeground(Color.red);
 
-                if (encender.isSelected())
-                estado.setText("ACELERANDO");
+                if (encender.isSelected()) {
+                    estado.setText("ACELERANDO");
+                    estadoMotor = EstadoMotor.ACELERANDO;
+                }
 
             } else {
                 acelerar.setText("ACELERAR");
                 acelerar.setForeground(Color.black);
                 estado.setText("ENCENDIDO");
+                estadoMotor = EstadoMotor.ENCENDIDO;
             }
 
             repaint();
@@ -147,13 +161,16 @@ public class FrameBotones extends javax.swing.JFrame {
                 frenar.setText("Soltar freno");
                 frenar.setForeground(Color.red);
 
-                if (encender.isSelected())
-                estado.setText("FRENANDO");
+                if (encender.isSelected()) {
+                    estado.setText("FRENANDO");
+                    estadoMotor = EstadoMotor.FRENANDO;
+                }
 
             } else {
                 frenar.setText("FRENAR");
                 frenar.setForeground(Color.black);
                 estado.setText("ENCENDIDO");
+                estadoMotor = EstadoMotor.ENCENDIDO;
             }
 
             repaint();
@@ -166,12 +183,14 @@ public class FrameBotones extends javax.swing.JFrame {
             encender.setText("APAGAR");
             encender.setForeground(Color.red);
             estado.setText("ENCENDIDO");
+            estadoMotor = EstadoMotor.ENCENDIDO;
         } else {
             estado.setText("APAGADO");
             encender.setText("ENCENDER");
             encender.setForeground(Color.green);
             acelerar.setSelected(false);
             frenar.setSelected(false);
+            estadoMotor = EstadoMotor.APAGADO;
         }
 
         repaint();

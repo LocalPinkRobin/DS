@@ -7,7 +7,7 @@ package s4;
 
 public class RepercutirRozamiento implements Filtro {
     
-    private double rozamiento = 10;
+    private double rozamiento = 50;
     
     @Override
     public double ejecutar(double revoluciones, EstadoMotor estadoMotor) {

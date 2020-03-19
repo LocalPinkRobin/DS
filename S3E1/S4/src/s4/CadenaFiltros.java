@@ -18,9 +18,11 @@ public class CadenaFiltros {
         filtros.add(filtro);
     }
     
-    public void ejecutar(double revoluciones, EstadoMotor estadoMotor) {
+    public double ejecutar(double revoluciones, EstadoMotor estadoMotor) {
         for (Filtro f : filtros) {
             revoluciones = f.ejecutar(revoluciones, estadoMotor);
         }
+        
+        return revoluciones;
     }
 }
