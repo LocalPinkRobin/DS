@@ -12,7 +12,7 @@ public class Salpicadero extends javax.swing.JPanel {
     
     private double kmh = 0;
     private double kmTotales = 0;
-    private double kmRecientes;
+    private double kmRecientes = 0;
 
     /**
      * Creates new form Salpicadero
@@ -22,6 +22,10 @@ public class Salpicadero extends javax.swing.JPanel {
     }
     
     public void ejecutar(double revoluciones, EstadoMotor estadoMotor) {
+        if (estadoMotor == EstadoMotor.APAGADO)
+            kmRecientes = 0;
+        
+        
         this.kmh = velocidadLineal(revoluciones);
 
         jProgressBarRPM.setValue((int) revoluciones);
@@ -43,14 +47,20 @@ public class Salpicadero extends javax.swing.JPanel {
     public class Hebra extends Thread {
         @Override
         public void run() {
+            double kmRecorridos = 0;
             while (true) {
                 try {
                     sleep(1000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Salpicadero.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                kmTotales += kmh/3600;
+                kmRecorridos = kmh/3600;
+                
+                kmTotales += kmRecorridos;
                 jLabelKilometrosTotales.setText(Double.toString(kmTotales));
+                
+                kmRecientes += kmRecorridos;
+                jLabelKilometrosRecientes.setText(Double.toString(kmRecientes));
             }
         }
     }
@@ -148,13 +158,12 @@ public class Salpicadero extends javax.swing.JPanel {
                     .addGroup(jInternalFrame2Layout.createSequentialGroup()
                         .addComponent(jLabelKilometrosRecientes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2))
                     .addGroup(jInternalFrame2Layout.createSequentialGroup()
                         .addComponent(jLabelKilometrosTotales)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
-                        .addGap(85, 85, 85))))
+                        .addComponent(jLabel6)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jInternalFrame2Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,23 +204,24 @@ public class Salpicadero extends javax.swing.JPanel {
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                .addContainerGap(126, Short.MAX_VALUE)
-                .addComponent(jLabelVelocidad, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addGap(156, 156, 156)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(jLabelVelocidad, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addGap(173, 173, 173)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                .addGap(87, 87, 87)
+                .addGap(107, 107, 107)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
                 .addComponent(jLabelVelocidad, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 450));
