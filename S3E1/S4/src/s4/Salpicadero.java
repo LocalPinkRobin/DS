@@ -19,7 +19,6 @@ public class Salpicadero extends javax.swing.JPanel {
      */
     public Salpicadero() {
         initComponents();
-        start();
     }
     
     public void ejecutar(double revoluciones, EstadoMotor estadoMotor) {
