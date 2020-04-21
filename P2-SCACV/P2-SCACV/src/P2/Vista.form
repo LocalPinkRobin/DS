@@ -168,7 +168,7 @@
           </Border>
         </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Cursor Por defecto"/>
+          <Color id="Default Cursor"/>
         </Property>
       </Properties>
 
@@ -400,7 +400,7 @@
                       <Component id="mantenerSCACV" max="32767" attributes="0"/>
                       <Component id="reiniciarSCACV" alignment="0" max="32767" attributes="0"/>
                       <Component id="apagadoSCACV" alignment="0" max="32767" attributes="0"/>
-                      <Component id="acelerSCACV" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
+                      <Component id="acelerarSCACV" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
@@ -417,7 +417,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="acelerSCACV" min="-2" max="-2" attributes="0"/>
+                  <Component id="acelerarSCACV" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="mantenerSCACV" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -435,18 +435,21 @@
             <Property name="text" type="java.lang.String" value="SCACV"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="acelerSCACV">
+        <Component class="javax.swing.JToggleButton" name="acelerarSCACV">
           <Properties>
             <Property name="text" type="java.lang.String" value="ACELERAR"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="acelerSCACVActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="acelerarSCACVActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="mantenerSCACV">
           <Properties>
             <Property name="text" type="java.lang.String" value="MANTENER"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mantenerSCACVActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="reiniciarSCACV">
           <Properties>
@@ -461,6 +464,9 @@
             <Property name="text" type="java.lang.String" value="APAGADO"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="apagadoSCACVActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

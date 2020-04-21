@@ -13,15 +13,26 @@ public class Vista extends javax.swing.JFrame {
 
     private double revoluciones = 0;
     private EstadosMotor estadoMotor = EstadosMotor.APAGADO;
+    private EstadoCrucero estadoCrucero = EstadoCrucero.APAGADO;
     
     private double kmh = 0;
     private double kmTotales = 0;
     private double kmRecientes = 0;
+    private Controlador controlador;
 
-    public Vista() {
+    public Vista(Controlador controlador) {
         initComponents();
+        this.controlador = controlador;
     }
-        public void ejecutar(double revoluciones, EstadosMotor estadoMotor) {
+    
+    private void permutarColor(javax.swing.JToggleButton boton) {
+        if (boton.getForeground() == Color.black)
+                boton.setForeground(Color.red);
+            else
+                boton.setForeground(Color.black);
+    }
+        
+    public void ejecutar(double revoluciones, EstadosMotor estadoMotor) {
         if (estadoMotor == EstadosMotor.APAGADO)
             kmRecientes = 0;
         
@@ -105,7 +116,7 @@ public class Vista extends javax.swing.JFrame {
         jLabelVelocidad = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        acelerSCACV = new javax.swing.JToggleButton();
+        acelerarSCACV = new javax.swing.JToggleButton();
         mantenerSCACV = new javax.swing.JToggleButton();
         reiniciarSCACV = new javax.swing.JToggleButton();
         apagadoSCACV = new javax.swing.JToggleButton();
@@ -277,14 +288,19 @@ public class Vista extends javax.swing.JFrame {
 
         jLabel7.setText("SCACV");
 
-        acelerSCACV.setText("ACELERAR");
-        acelerSCACV.addActionListener(new java.awt.event.ActionListener() {
+        acelerarSCACV.setText("ACELERAR");
+        acelerarSCACV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                acelerSCACVActionPerformed(evt);
+                acelerarSCACVActionPerformed(evt);
             }
         });
 
         mantenerSCACV.setText("MANTENER");
+        mantenerSCACV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mantenerSCACVActionPerformed(evt);
+            }
+        });
 
         reiniciarSCACV.setText("REINICIAR");
         reiniciarSCACV.addActionListener(new java.awt.event.ActionListener() {
@@ -295,6 +311,11 @@ public class Vista extends javax.swing.JFrame {
 
         apagadoSCACV.setText("APAGADO");
         apagadoSCACV.setToolTipText("");
+        apagadoSCACV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apagadoSCACVActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -306,7 +327,7 @@ public class Vista extends javax.swing.JFrame {
                     .addComponent(mantenerSCACV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(reiniciarSCACV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(apagadoSCACV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(acelerSCACV, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(acelerarSCACV, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(69, 69, 69)
@@ -319,7 +340,7 @@ public class Vista extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addComponent(acelerSCACV)
+                .addComponent(acelerarSCACV)
                 .addGap(18, 18, 18)
                 .addComponent(mantenerSCACV)
                 .addGap(18, 18, 18)
@@ -423,17 +444,23 @@ public class Vista extends javax.swing.JFrame {
 
     private void encenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encenderActionPerformed
         if (encender.isSelected()) {
-            encender.setText("APAGAR");
-            encender.setForeground(Color.red);
-            estado.setText("ENCENDIDO");
-            estadoMotor = EstadosMotor.ENCENDIDO;
+            if (controlador.setEstadoMotor(EstadosMotor.ENCENDIDO)) {
+                encender.setText("APAGAR");
+                encender.setForeground(Color.red);
+                estado.setText("ENCENDIDO");
+            } else {
+                encender.setSelected(false);
+            }
         } else {
+            if (controlador.setEstadoMotor(EstadosMotor.APAGADO)) {
             estado.setText("APAGADO");
             encender.setText("ENCENDER");
             encender.setForeground(Color.green);
             acelerar.setSelected(false);
             frenar.setSelected(false);
-            estadoMotor = EstadosMotor.APAGADO;
+            } else {
+                encender.setSelected(true);
+            }
         }
 
         repaint();
@@ -443,19 +470,22 @@ public class Vista extends javax.swing.JFrame {
     private void acelerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acelerarActionPerformed
         if (encender.isSelected() && !frenar.isSelected()) {
             if (acelerar.isSelected()) {
-                acelerar.setText("Soltar acelerador");
-                acelerar.setForeground(Color.red);
-
-                if (encender.isSelected()) {
-                    estado.setText("ACELERANDO");
-                    estadoMotor = EstadosMotor.ACELERANDO;
+                if (encender.isSelected() && controlador.setEstadoMotor(EstadosMotor.ACELERANDO)) {
+                    acelerar.setText("Soltar acelerador");
+                    acelerar.setForeground(Color.red);
+                    estado.setText("ACELERANDO");   
+                } else {
+                    acelerar.setSelected(false);
                 }
 
             } else {
-                acelerar.setText("ACELERAR");
-                acelerar.setForeground(Color.black);
-                estado.setText("ENCENDIDO");
-                estadoMotor = EstadosMotor.ENCENDIDO;
+                if (controlador.setEstadoMotor(EstadosMotor.ENCENDIDO)) {
+                    acelerar.setText("ACELERAR");
+                    acelerar.setForeground(Color.black);
+                    estado.setText("ENCENDIDO");
+                } else {
+                    acelerar.setSelected(true);
+                }
             }
 
             repaint();
@@ -466,19 +496,22 @@ public class Vista extends javax.swing.JFrame {
     private void frenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frenarActionPerformed
         if (encender.isSelected() && !acelerar.isSelected()) {
             if (frenar.isSelected()) {
-                frenar.setText("Soltar freno");
-                frenar.setForeground(Color.red);
-
-                if (encender.isSelected()) {
+                if (encender.isSelected() && controlador.setEstadoMotor(EstadosMotor.FRENANDO)) {
+                    frenar.setText("Soltar freno");
+                    frenar.setForeground(Color.red);
                     estado.setText("FRENANDO");
-                    estadoMotor = EstadosMotor.FRENANDO;
+                } else {
+                    frenar.setSelected(false);
                 }
 
             } else {
-                frenar.setText("FRENAR");
-                frenar.setForeground(Color.black);
-                estado.setText("ENCENDIDO");
-                estadoMotor = EstadosMotor.ENCENDIDO;
+                if (controlador.setEstadoMotor(EstadosMotor.ENCENDIDO)) {
+                    frenar.setText("FRENAR");
+                    frenar.setForeground(Color.black);
+                    estado.setText("ENCENDIDO");
+                } else {
+                    frenar.setSelected(false);
+                }
             }
 
             repaint();
@@ -486,13 +519,29 @@ public class Vista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_frenarActionPerformed
 
-    private void acelerSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acelerSCACVActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_acelerSCACVActionPerformed
-
     private void reiniciarSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarSCACVActionPerformed
-        // TODO add your handling code here:
+        controlador.setEstadoCrucero(EstadoCrucero.REINICIAR);
+        this.permutarColor(reiniciarSCACV);
+        // Cambiar etiquieta de estado
     }//GEN-LAST:event_reiniciarSCACVActionPerformed
+
+    private void acelerarSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acelerarSCACVActionPerformed
+        controlador.setEstadoCrucero(EstadoCrucero.ACELERAR);
+        this.permutarColor(acelerarSCACV);
+        // Cambiar etiquieta de estado
+    }//GEN-LAST:event_acelerarSCACVActionPerformed
+
+    private void mantenerSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mantenerSCACVActionPerformed
+        controlador.setEstadoCrucero(EstadoCrucero.REINICIAR);
+        this.permutarColor(mantenerSCACV);
+        // Cambiar etiquieta de estado
+    }//GEN-LAST:event_mantenerSCACVActionPerformed
+
+    private void apagadoSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagadoSCACVActionPerformed
+        controlador.setEstadoCrucero(EstadoCrucero.APAGADO);
+        this.permutarColor(apagadoSCACV);
+        // Cambiar etiquieta de estado
+    }//GEN-LAST:event_apagadoSCACVActionPerformed
 
     /**
      * @param args the command line arguments
@@ -530,8 +579,8 @@ public class Vista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton acelerSCACV;
     private javax.swing.JToggleButton acelerar;
+    private javax.swing.JToggleButton acelerarSCACV;
     private javax.swing.JToggleButton apagadoSCACV;
     private javax.swing.JToggleButton encender;
     private javax.swing.JLabel estado;
