@@ -1,15 +1,18 @@
 package P2;
 
 public abstract class Consumo {
-    Motor motor;
     int rpm;
     Boolean aviso = false;
 
 
     public abstract Boolean aviso ();
 
-    public void compostaje(){
+    public void repostar(){
         aviso = false;
+    }
+    
+    public void setRpm(int rpm) {
+        this.rpm = rpm;
     }
 
 }

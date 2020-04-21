@@ -5,26 +5,16 @@
  */
 package P2;
 import java.awt.Color;
-import static java.lang.Thread.sleep;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Vista extends javax.swing.JFrame {
-
-    private double revoluciones = 0;
-    private EstadosMotor estadoMotor = EstadosMotor.APAGADO;
-    private EstadoCrucero estadoCrucero = EstadoCrucero.APAGADO;
     
-    private double kmh = 0;
-    private double kmTotales = 0;
-    private double kmRecientes = 0;
     private Controlador controlador;
 
     public Vista() {
         initComponents();
     }
     
-    private void setControlador(Controlador controlador) {
+    public void setControlador(Controlador controlador) {
         this.controlador = controlador;
     }
     
@@ -91,72 +81,33 @@ public class Vista extends javax.swing.JFrame {
         ultimaVelocidad.setText(ultima.toString());
     }
     
-    public void avisoCombutible (Boolean aviso){
-        gasolina.setForeground(Color.red);
+    public void avisoCombustible (Boolean aviso){
+        if (aviso)
+            gasolina.setForeground(Color.red);
+        else
+            gasolina.setForeground(Color.black);
     }
     public void avisoAceite (Boolean aviso){
-        aceite.setForeground(Color.red);
+        if (aviso)
+            aceite.setForeground(Color.red);
+        else
+            aceite.setForeground(Color.black);
 
     }
     public void avisoFrenos (Boolean aviso){
-        frenos.setForeground(Color.red);    
+        if (aviso)
+            frenos.setForeground(Color.red);
+        else
+            frenos.setForeground(Color.black);
     }
     public void avisoGeneral (Boolean aviso){
-        revision.setForeground(Color.red);
-        
+        if (aviso)
+            revision.setForeground(Color.red);
+        else
+            revision.setForeground(Color.black);
     }
     
     ////////////////////////////////////////////////////////////////////////////
-    public void ejecutar(double revoluciones, EstadosMotor estadoMotor) {
-        if (estadoMotor == EstadosMotor.APAGADO)
-            kmRecientes = 0;
-        
-        
-        this.kmh = velocidadLineal(revoluciones);
-
-        jLabelVelocidad.setText(Double.toString(kmh));
-    }
-    
-    private double velocidadLineal(double velocidadAngular) {
-        double radioMotor = 0.015;
-        
-        double resultado = (2*Math.PI)*radioMotor*velocidadAngular*(60d/100d);
-        return resultado;
-    }
-    
-    public void start() {
-        Hebra hebra = new Hebra();
-        hebra.start();
-    }
-    
-    public class Hebra extends Thread {
-        @Override
-        public void run() {
-            double kmRecorridos = 0;
-            while (true) {
-                try {
-                    sleep(1000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Salpicadero.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                kmRecorridos = kmh/3600;
-                
-                kmTotales += kmRecorridos;
-                jLabelKilometrosTotales.setText(Double.toString(kmTotales));
-                
-                kmRecientes += kmRecorridos;
-                jLabelKilometrosRecientes.setText(Double.toString(kmRecientes));
-            }
-        }
-    }
-    
-    public double getRevoluciones() {
-        return revoluciones;
-    }
-    
-    public EstadosMotor getEstadoMotor() {
-        return estadoMotor;
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

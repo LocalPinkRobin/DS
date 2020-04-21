@@ -16,7 +16,7 @@ public class ConsumoCombustible extends Consumo{
     }
 
     @Override
-    public void compostaje (){
+    public void repostar (){
         combustible = MAX;
         aviso = false;
     }
@@ -24,6 +24,7 @@ public class ConsumoCombustible extends Consumo{
     void actualizarCombustible (){
         combustible = rpm*rpm*5*pow(10,-10);
     }
+    
     Double getCombustible () {
         return (combustible);
     }

@@ -8,10 +8,19 @@ package P2;
 public class Modelo {
     private Motor motor;
     private ControlCrucero controlCrucero;
-    private ConsumoCombustible consumoConbustible;
+    private ConsumoCombustible consumoCombustible;
     private ConsumoAceite consumoAceite;
     private ConsumoFrenos consumoFrenos;
     private ConsumoGeneral consumoGeneral;
+    
+    public Modelo() {
+        motor =              new Motor(0.015, 30);
+        controlCrucero =     new ControlCrucero();
+        consumoCombustible = new ConsumoCombustible();
+        consumoAceite =      new ConsumoAceite();
+        consumoFrenos =      new ConsumoFrenos();
+        consumoGeneral =     new ConsumoGeneral();
+    }
 
     public Motor getMotor() {
         return motor;
@@ -21,8 +30,8 @@ public class Modelo {
         return controlCrucero;
     }
 
-    public ConsumoCombustible getConsumoConbustible() {
-        return consumoConbustible;
+    public ConsumoCombustible getConsumoCombustible() {
+        return consumoCombustible;
     }
 
     public ConsumoAceite getConsumoAceite() {

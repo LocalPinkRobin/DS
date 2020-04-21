@@ -9,9 +9,9 @@ public class Motor {
     private EstadosMotor estadoActual = EstadosMotor.APAGADO;
     private int revoluciones;
     private Double tamEje;
-    private Double factorRozamiento;
+    private int factorRozamiento;
     
-    public Motor(Double tamEje, Double factorRozamiento) {
+    public Motor(Double tamEje, int factorRozamiento) {
         this.tamEje = tamEje;
         this.factorRozamiento = factorRozamiento;
     }
@@ -28,7 +28,7 @@ public class Motor {
         return tamEje;
     }
 
-    public Double getFactorRozamiento() {
+    public int getFactorRozamiento() {
         return factorRozamiento;
     }
 
