@@ -9,6 +9,7 @@ public abstract class Consumo {
 
     public void repostar(){
         aviso = false;
+        rpm = 0;
     }
     
     public void setRpm(int rpm) {

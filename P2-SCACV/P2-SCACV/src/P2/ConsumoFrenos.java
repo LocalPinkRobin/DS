@@ -6,7 +6,7 @@ public class ConsumoFrenos extends Consumo{
 
     @Override
     public Boolean  aviso(){
-        if( (rpm % (pow(10,8))) == 0){
+        if( (rpm >= (pow(10,8)))){
             aviso = true;
         }
         return aviso;

@@ -151,6 +151,10 @@ public class Vista extends javax.swing.JFrame {
         frenos = new javax.swing.JLabel();
         aceite = new javax.swing.JLabel();
         revision = new javax.swing.JLabel();
+        Respostar = new javax.swing.JButton();
+        cambiaraceite = new javax.swing.JButton();
+        cambiarFrenos = new javax.swing.JButton();
+        revisionGeneral = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(205, 255, 217));
@@ -419,6 +423,35 @@ public class Vista extends javax.swing.JFrame {
         revision.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         revision.setText("Revisión general");
 
+        Respostar.setText("Repostar");
+        Respostar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RespostarActionPerformed(evt);
+            }
+        });
+
+        cambiaraceite.setText("Cambiar aceite");
+        cambiaraceite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiaraceiteActionPerformed(evt);
+            }
+        });
+
+        cambiarFrenos.setText("Cambiar Frenos");
+        cambiarFrenos.setActionCommand("Cambiar Frenos");
+        cambiarFrenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiarFrenosActionPerformed(evt);
+            }
+        });
+
+        revisionGeneral.setText("Hacer revision general");
+        revisionGeneral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                revisionGeneralActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -452,16 +485,20 @@ public class Vista extends javax.swing.JFrame {
                         .addContainerGap(44, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(110, 110, 110)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(frenos)
-                            .addComponent(revision)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cambiarFrenos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Respostar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(frenos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(gasolina)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(8, 8, 8)
-                                        .addComponent(aceite)))))
+                                        .addComponent(aceite))))
+                            .addComponent(revision, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cambiaraceite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(revisionGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -483,10 +520,7 @@ public class Vista extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(gasolina)
@@ -495,7 +529,20 @@ public class Vista extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(frenos)
                         .addGap(18, 18, 18)
-                        .addComponent(revision)))
+                        .addComponent(revision)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Respostar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(cambiaraceite, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cambiarFrenos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(revisionGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
@@ -603,6 +650,22 @@ public class Vista extends javax.swing.JFrame {
         // Cambiar etiquieta de estado
     }//GEN-LAST:event_apagadoSCACVActionPerformed
 
+    private void RespostarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RespostarActionPerformed
+        controlador.repostar();
+    }//GEN-LAST:event_RespostarActionPerformed
+
+    private void cambiaraceiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiaraceiteActionPerformed
+        controlador.cambiarAceite();
+    }//GEN-LAST:event_cambiaraceiteActionPerformed
+
+    private void cambiarFrenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarFrenosActionPerformed
+        controlador.cambiarFrenos();
+    }//GEN-LAST:event_cambiarFrenosActionPerformed
+
+    private void revisionGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_revisionGeneralActionPerformed
+        controlador.hacerRevisionGeneral();
+    }//GEN-LAST:event_revisionGeneralActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -639,10 +702,13 @@ public class Vista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Respostar;
     private javax.swing.JLabel aceite;
     private javax.swing.JToggleButton acelerar;
     private javax.swing.JToggleButton acelerarSCACV;
     private javax.swing.JToggleButton apagadoSCACV;
+    private javax.swing.JButton cambiarFrenos;
+    private javax.swing.JButton cambiaraceite;
     private javax.swing.JToggleButton encender;
     private javax.swing.JLabel estado;
     private javax.swing.JLabel etiquetaCrucero;
@@ -671,6 +737,7 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JToggleButton mantenerSCACV;
     private javax.swing.JToggleButton reiniciarSCACV;
     private javax.swing.JLabel revision;
+    private javax.swing.JButton revisionGeneral;
     private javax.swing.JLabel ultimaVelocidad;
     // End of variables declaration//GEN-END:variables
 }

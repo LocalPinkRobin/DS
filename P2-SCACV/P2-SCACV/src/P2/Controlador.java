@@ -79,12 +79,20 @@ public class Controlador {
             acelerando.interrupt();
         }
         
+        if (encendido.isAlive()){
+            encendido.interrupt();
+        }
+        
         acelerando.start();
     }
     
     private void encendido() {
         if (encendido.isAlive()) {
-            encendido.interrupt();
+            encendido.stop();
+        }
+        
+        if (acelerando.isAlive()){
+            acelerando.stop();
         }
         
         encendido.start();
@@ -128,6 +136,22 @@ public class Controlador {
         modelo.getConsumoAceite().setRpm(revoluciones);
         modelo.getConsumoFrenos().setRpm(revoluciones);
         modelo.getConsumoGeneral().setRpm(revoluciones);
+    }
+    
+    public void repostar(){
+        modelo.getConsumoCombustible().repostar();
+    }
+    
+    public void cambiarAceite(){
+        modelo.getConsumoAceite().repostar();
+    }
+    
+    public void cambiarFrenos(){
+        modelo.getConsumoFrenos().repostar();
+    }
+    
+    public void hacerRevisionGeneral(){
+        modelo.getConsumoGeneral().repostar();;
     }
     
     public class CalculoEstadisticas extends Thread {
