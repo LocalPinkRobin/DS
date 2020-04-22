@@ -13,7 +13,8 @@ public class Controlador {
     private final int INCREVDEFECTO = 50;
     
     Modelo modelo;
-    Vista vista;
+    VistaPanel vista;
+    VentanaApplet ventana;
     
     private Double kmh = 0d;
     private Double kmTotales = 0d;
@@ -34,8 +35,11 @@ public class Controlador {
     
     public Controlador() {
         modelo = new Modelo();
-        vista =  new Vista();
+        vista =  new VistaPanel();
         vista.setControlador(this);
+        
+        ventana = new VentanaApplet();
+        ventana.add(vista);
         
         bloqueoRevoluciones = modelo.getMotor().getFactorRozamiento();
         
@@ -48,7 +52,8 @@ public class Controlador {
     }
     
     public void ejecutar() {
-        vista.setVisible(true);
+        ventana.init();
+        ventana.start();
         encendido.start();
         estadisticas.start();
         crucero.start();
@@ -83,6 +88,9 @@ public class Controlador {
             vista.velGuardada(0d);
         else
             vista.velGuardada(velGuardada);
+        
+        ventana.repaint();
+        ventana.revalidate();
     }
     
     public void setIncrementoRevoluciones(int incremento) {

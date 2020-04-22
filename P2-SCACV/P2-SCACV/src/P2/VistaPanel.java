@@ -4,19 +4,27 @@
  * and open the template in the editor.
  */
 package P2;
+
 import java.awt.Color;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Vista extends javax.swing.JFrame {
-    
+/**
+ *
+ * @author dario
+ */
+public class VistaPanel extends javax.swing.JPanel {
+
     private static DecimalFormat df1 = new DecimalFormat("0.0");
     private static DecimalFormat df2 = new DecimalFormat("0.00");
     
     private Controlador controlador;
-
-    public Vista() {
+    
+    /**
+     * Creates new form VistaPanel
+     */
+    public VistaPanel() {
         initComponents();
     }
     
@@ -238,8 +246,6 @@ public class Vista extends javax.swing.JFrame {
         ultimarpmrevision.setText(Integer.toString(rpm));
 
     }
-    
-    ////////////////////////////////////////////////////////////////////////////
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -250,6 +256,23 @@ public class Vista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        estadoGeneral = new javax.swing.JLabel();
+        ultimarpmaceite = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        etiquetaCrucero = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        ultimaVelocidad = new javax.swing.JLabel();
+        acelerarSCACV = new javax.swing.JButton();
+        mantenerSCACV = new javax.swing.JButton();
+        reiniciarSCACV = new javax.swing.JButton();
+        apagadoSCACV = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        ultimarpmfrenos = new javax.swing.JLabel();
+        ultimarpmrevision = new javax.swing.JLabel();
         encender = new javax.swing.JToggleButton();
         acelerar = new javax.swing.JToggleButton();
         frenar = new javax.swing.JToggleButton();
@@ -266,18 +289,6 @@ public class Vista extends javax.swing.JFrame {
         gasolina = new javax.swing.JLabel();
         nivelGasolina = new javax.swing.JLabel();
         repostar = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        radial1 = new eu.hansolo.steelseries.gauges.Radial();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        etiquetaCrucero = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        ultimaVelocidad = new javax.swing.JLabel();
-        acelerarSCACV = new javax.swing.JButton();
-        mantenerSCACV = new javax.swing.JButton();
-        reiniciarSCACV = new javax.swing.JButton();
-        apagadoSCACV = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         frenos = new javax.swing.JLabel();
         aceite = new javax.swing.JLabel();
@@ -287,16 +298,119 @@ public class Vista extends javax.swing.JFrame {
         revisionGeneral = new javax.swing.JButton();
         nivelAceite = new javax.swing.JLabel();
         nivelFreno = new javax.swing.JLabel();
-        estadoGeneral = new javax.swing.JLabel();
-        ultimarpmaceite = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        ultimarpmfrenos = new javax.swing.JLabel();
-        ultimarpmrevision = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        radial1 = new eu.hansolo.steelseries.gauges.Radial();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(205, 255, 217));
+        estadoGeneral.setText("0%");
+
+        ultimarpmaceite.setText("0");
+
+        jLabel10.setText("r.p.m acumulado");
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel7.setText("SCACV");
+
+        etiquetaCrucero.setText("APAGADO");
+
+        jLabel13.setText("Velocidad guardada:");
+
+        jLabel14.setText("Estado:");
+
+        ultimaVelocidad.setText("No Hay");
+
+        acelerarSCACV.setText("ACELERAR");
+        acelerarSCACV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acelerarSCACVActionPerformed(evt);
+            }
+        });
+
+        mantenerSCACV.setText("MANTENER");
+        mantenerSCACV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mantenerSCACVActionPerformed(evt);
+            }
+        });
+
+        reiniciarSCACV.setText("REINICIAR");
+        reiniciarSCACV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reiniciarSCACVActionPerformed(evt);
+            }
+        });
+
+        apagadoSCACV.setForeground(new java.awt.Color(255, 0, 0));
+        apagadoSCACV.setText("APAGADO");
+        apagadoSCACV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apagadoSCACVActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap(139, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(acelerarSCACV, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(mantenerSCACV)
+                                .addGap(18, 18, 18)
+                                .addComponent(reiniciarSCACV, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(apagadoSCACV, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(107, 107, 107)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel14)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(etiquetaCrucero))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel13)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(ultimaVelocidad)))))
+                        .addGap(83, 83, 83))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(317, 317, 317))))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(acelerarSCACV)
+                    .addComponent(mantenerSCACV)
+                    .addComponent(reiniciarSCACV)
+                    .addComponent(apagadoSCACV))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiquetaCrucero)
+                    .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(ultimaVelocidad))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        jLabel11.setText("r.p.m acumulado");
+
+        jLabel12.setText("r.p.m acumulado");
+
+        ultimarpmfrenos.setText("0");
+
+        ultimarpmrevision.setText("0");
 
         encender.setFont(new java.awt.Font("DejaVu Sans", 1, 12)); // NOI18N
         encender.setForeground(new java.awt.Color(0, 255, 0));
@@ -345,7 +459,7 @@ public class Vista extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(radial2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("DejaVu Sans", 1, 24)); // NOI18N
@@ -476,133 +590,6 @@ public class Vista extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        radial1.setMaxValue(300.0);
-        radial1.setThreshold(120.0);
-        radial1.setTitle("Velocimetro");
-        radial1.setUnitString("Km/h");
-
-        javax.swing.GroupLayout radial1Layout = new javax.swing.GroupLayout(radial1);
-        radial1.setLayout(radial1Layout);
-        radial1Layout.setHorizontalGroup(
-            radial1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 265, Short.MAX_VALUE)
-        );
-        radial1Layout.setVerticalGroup(
-            radial1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(radial1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(radial1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel7.setText("SCACV");
-
-        etiquetaCrucero.setText("APAGADO");
-
-        jLabel13.setText("Velocidad guardada:");
-
-        jLabel14.setText("Estado:");
-
-        ultimaVelocidad.setText("No Hay");
-
-        acelerarSCACV.setText("ACELERAR");
-        acelerarSCACV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                acelerarSCACVActionPerformed(evt);
-            }
-        });
-
-        mantenerSCACV.setText("MANTENER");
-        mantenerSCACV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mantenerSCACVActionPerformed(evt);
-            }
-        });
-
-        reiniciarSCACV.setText("REINICIAR");
-        reiniciarSCACV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reiniciarSCACVActionPerformed(evt);
-            }
-        });
-
-        apagadoSCACV.setForeground(new java.awt.Color(255, 0, 0));
-        apagadoSCACV.setText("APAGADO");
-        apagadoSCACV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                apagadoSCACVActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(139, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(acelerarSCACV, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(mantenerSCACV)
-                                .addGap(18, 18, 18)
-                                .addComponent(reiniciarSCACV, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(apagadoSCACV, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(107, 107, 107)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel14)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(etiquetaCrucero))
-                                    .addGroup(jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(ultimaVelocidad)))))
-                        .addGap(83, 83, 83))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(317, 317, 317))))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel7)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(acelerarSCACV)
-                    .addComponent(mantenerSCACV)
-                    .addComponent(reiniciarSCACV)
-                    .addComponent(apagadoSCACV))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(etiquetaCrucero)
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(ultimaVelocidad))
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-
         jLabel8.setText("Motor:");
 
         frenos.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -639,22 +626,38 @@ public class Vista extends javax.swing.JFrame {
 
         nivelFreno.setText("0%");
 
-        estadoGeneral.setText("0%");
+        radial1.setMaxValue(300.0);
+        radial1.setThreshold(120.0);
+        radial1.setTitle("Velocimetro");
+        radial1.setUnitString("Km/h");
 
-        ultimarpmaceite.setText("0");
+        javax.swing.GroupLayout radial1Layout = new javax.swing.GroupLayout(radial1);
+        radial1.setLayout(radial1Layout);
+        radial1Layout.setHorizontalGroup(
+            radial1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 265, Short.MAX_VALUE)
+        );
+        radial1Layout.setVerticalGroup(
+            radial1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
-        jLabel10.setText("r.p.m acumulado");
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(radial1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(radial1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
-        jLabel11.setText("r.p.m acumulado");
-
-        jLabel12.setText("r.p.m acumulado");
-
-        ultimarpmfrenos.setText("0");
-
-        ultimarpmrevision.setText("0");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -689,7 +692,7 @@ public class Vista extends javax.swing.JFrame {
                             .addComponent(frenos)
                             .addComponent(revision)
                             .addComponent(aceite))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nivelFreno, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(estadoGeneral, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -739,7 +742,7 @@ public class Vista extends javax.swing.JFrame {
                                     .addComponent(frenar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cambiarAceite, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10)
@@ -763,9 +766,23 @@ public class Vista extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void acelerarSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acelerarSCACVActionPerformed
+        this.pulsarAcelerarSCACV(true);
+    }//GEN-LAST:event_acelerarSCACVActionPerformed
+
+    private void mantenerSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mantenerSCACVActionPerformed
+        this.pulsarMantenerSCACV(true);
+    }//GEN-LAST:event_mantenerSCACVActionPerformed
+
+    private void reiniciarSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarSCACVActionPerformed
+        this.pulsarReiniciarSCACV(true);
+    }//GEN-LAST:event_reiniciarSCACVActionPerformed
+
+    private void apagadoSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagadoSCACVActionPerformed
+        this.pulsarApagadoSCACV(true);
+    }//GEN-LAST:event_apagadoSCACVActionPerformed
 
     private void encenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encenderActionPerformed
         if (encender.isSelected()) {
@@ -778,9 +795,9 @@ public class Vista extends javax.swing.JFrame {
             }
         } else {
             if (controlador.setEstadoMotor(EstadosMotor.APAGADO)) {
-            desactivarEncender();
-            desactivarAcelerador();
-            desactivarFreno();
+                desactivarEncender();
+                desactivarAcelerador();
+                desactivarFreno();
             } else {
                 activarEncender();
             }
@@ -846,64 +863,13 @@ public class Vista extends javax.swing.JFrame {
     private void cambiarFrenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarFrenosActionPerformed
         setUltimasRpmFrenos(controlador.modelo.getConsumoFrenos().getRpmTotales());
         controlador.cambiarFrenos();
-
     }//GEN-LAST:event_cambiarFrenosActionPerformed
 
     private void revisionGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_revisionGeneralActionPerformed
-        setUltimasRpmRevision(controlador.modelo.getConsumoGeneral().getRpmTotales());    
+        setUltimasRpmRevision(controlador.modelo.getConsumoGeneral().getRpmTotales());
         controlador.hacerRevisionGeneral();
     }//GEN-LAST:event_revisionGeneralActionPerformed
 
-    private void acelerarSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acelerarSCACVActionPerformed
-        this.pulsarAcelerarSCACV(true);
-    }//GEN-LAST:event_acelerarSCACVActionPerformed
-
-    private void mantenerSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mantenerSCACVActionPerformed
-        this.pulsarMantenerSCACV(true);
-    }//GEN-LAST:event_mantenerSCACVActionPerformed
-
-    private void reiniciarSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarSCACVActionPerformed
-        this.pulsarReiniciarSCACV(true);
-    }//GEN-LAST:event_reiniciarSCACVActionPerformed
-
-    private void apagadoSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagadoSCACVActionPerformed
-        this.pulsarApagadoSCACV(true);
-    }//GEN-LAST:event_apagadoSCACVActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Vista().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aceite;
