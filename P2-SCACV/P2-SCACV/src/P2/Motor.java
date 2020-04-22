@@ -6,8 +6,11 @@
 package P2;
 
 public class Motor {
+    private final int MAXREVDEFECTO = 6000;
+    
     private EstadosMotor estadoActual = EstadosMotor.APAGADO;
     private int revoluciones;
+    private int maxRevoluciones = MAXREVDEFECTO;
     private Double tamEje;
     private int factorRozamiento;
     
@@ -32,12 +35,16 @@ public class Motor {
         return factorRozamiento;
     }
 
+    public int getMaxRevoluciones() {
+        return maxRevoluciones;
+    }
+
     public Boolean setEstadoActual(EstadosMotor estado) {
         Boolean exito = false;
         
         if (estado != this.estadoActual) {
             if (estado == EstadosMotor.APAGADO) {
-                if (this.estadoActual == EstadosMotor.ENCENDIDO) {
+                if (this.estadoActual == EstadosMotor.ENCENDIDO && this.revoluciones == 0) {
                     this.estadoActual = estado;
                     exito = true;
                 }
@@ -66,6 +73,11 @@ public class Motor {
         else
             this.revoluciones = 0;
     }
-    
-    
+
+    public void setMaxRevoluciones(int maxRevoluciones) {
+        if (maxRevoluciones > 0)
+            this.maxRevoluciones = maxRevoluciones;
+        else
+            this.maxRevoluciones = 1;
+    }
 }

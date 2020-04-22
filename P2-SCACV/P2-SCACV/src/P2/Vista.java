@@ -5,8 +5,14 @@
  */
 package P2;
 import java.awt.Color;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Vista extends javax.swing.JFrame {
+    
+    private static DecimalFormat df1 = new DecimalFormat("0.0");
+    private static DecimalFormat df2 = new DecimalFormat("0.00");
     
     private Controlador controlador;
 
@@ -18,11 +24,93 @@ public class Vista extends javax.swing.JFrame {
         this.controlador = controlador;
     }
     
-    private void permutarColor(javax.swing.JToggleButton boton) {
-        if (boton.getForeground() == Color.black)
-                boton.setForeground(Color.red);
-            else
-                boton.setForeground(Color.black);
+    private void permutarColorBoton(javax.swing.JButton boton, Color apagado, Color encendido) {
+        if (boton.getForeground() == apagado)
+                boton.setForeground(encendido);
+        else
+            boton.setForeground(apagado);
+    }
+    
+    private void desactivarBotones(ArrayList<javax.swing.JButton> botones) {
+        for (javax.swing.JButton boton : botones) {
+            boton.setForeground(Color.black);
+        }
+    }
+    
+    void pulsarAcelerarSCACV(Boolean cambiarEstado) {
+        
+        desactivarBotones(new ArrayList<>(Arrays.asList(mantenerSCACV,reiniciarSCACV,apagadoSCACV)));
+        this.permutarColorBoton(acelerarSCACV, Color.black, Color.red);
+        this.etiquetaCrucero.setText("ACELERANDO");
+        if (cambiarEstado) {
+            controlador.setEstadoCrucero(EstadoCrucero.ACELERAR);
+        }
+        this.desactivarAcelerador();
+    }
+    
+    void pulsarMantenerSCACV(Boolean cambiarEstado) {
+        desactivarBotones(new ArrayList<>(Arrays.asList(acelerarSCACV,reiniciarSCACV,apagadoSCACV)));
+        this.permutarColorBoton(mantenerSCACV, Color.black, Color.red);
+        this.etiquetaCrucero.setText("MANTENIENDO");
+        if (cambiarEstado) {
+            controlador.setEstadoCrucero(EstadoCrucero.MANTENER);
+        }
+        this.desactivarAcelerador();
+    }
+    
+    void pulsarReiniciarSCACV(Boolean cambiarEstado) {
+        desactivarBotones(new ArrayList<>(Arrays.asList(mantenerSCACV,acelerarSCACV,apagadoSCACV)));
+        this.permutarColorBoton(reiniciarSCACV, Color.black, Color.red);
+        this.etiquetaCrucero.setText("REINICIANDO");
+        if (cambiarEstado) {
+            controlador.setEstadoCrucero(EstadoCrucero.REINICIAR);
+        }
+        this.desactivarAcelerador();
+    }
+    
+    void pulsarApagadoSCACV(Boolean cambiarEstado) {
+        desactivarBotones(new ArrayList<>(Arrays.asList(mantenerSCACV,reiniciarSCACV,acelerarSCACV)));
+        this.permutarColorBoton(apagadoSCACV, Color.black, Color.red);
+        this.etiquetaCrucero.setText("APAGADO");
+        if (cambiarEstado) {
+            controlador.setEstadoCrucero(EstadoCrucero.APAGADO);
+        }
+    }
+    
+    private void activarEncender() {
+        encender.setSelected(true);
+        encender.setText("APAGAR");
+        encender.setForeground(Color.red);
+    }
+    
+    private void desactivarEncender() {
+        encender.setSelected(false);
+        encender.setText("ENCENDER");
+        encender.setForeground(Color.black);
+    }
+    
+    private void activarAcelerador() {
+        acelerar.setSelected(true);
+        acelerar.setText("Soltar acelerador");
+        acelerar.setForeground(Color.red);
+    }
+    
+    private void desactivarAcelerador() {
+        acelerar.setSelected(false);
+        acelerar.setText("ACELERAR");
+        acelerar.setForeground(Color.black);
+    }
+    
+    private void activarFreno() {
+        frenar.setSelected(true);
+        frenar.setText("Soltar freno");
+        frenar.setForeground(Color.red);
+    }
+    
+    private void desactivarFreno() {
+        frenar.setSelected(false);
+        frenar.setText("FRENAR");
+        frenar.setForeground(Color.black);
     }
         
     //NUEVOS////////////////////////////////////////////////////////////////////
@@ -30,6 +118,7 @@ public class Vista extends javax.swing.JFrame {
     
     public void setRevoluciones(int revoluciones) {
         jProgressBarRPM.setValue(revoluciones);
+        etiquetaRpm.setText(Integer.toString(revoluciones));
     }
     
     public void setEstadoMotor(EstadosMotor e){
@@ -65,20 +154,23 @@ public class Vista extends javax.swing.JFrame {
     }
     
     public void setKmh (Double kmh){
-        jLabelVelocidad.setText(kmh.toString());
+        jLabelVelocidad.setText(df1.format(kmh));
     }
     
     public void setKmRecientes(Double km){
-        jLabelKilometrosRecientes.setText(km.toString());
+        jLabelKilometrosRecientes.setText(df2.format(km));
     }
     
     public void setKmTotales (Double totales){
-        jLabelKilometrosTotales.setText(totales.toString());
+        jLabelKilometrosTotales.setText(df2.format(totales));
 
     }
     
     public void velGuardada (Double ultima){
-        ultimaVelocidad.setText(ultima.toString());
+        if (ultima == 0d)
+            ultimaVelocidad.setText("No Hay");
+        else
+            ultimaVelocidad.setText(df1.format(ultima));
     }
     
     public void avisoCombustible (Boolean aviso){
@@ -87,6 +179,7 @@ public class Vista extends javax.swing.JFrame {
         else
             gasolina.setForeground(Color.black);
     }
+    
     public void avisoAceite (Boolean aviso){
         if (aviso)
             aceite.setForeground(Color.red);
@@ -94,17 +187,42 @@ public class Vista extends javax.swing.JFrame {
             aceite.setForeground(Color.black);
 
     }
+    
     public void avisoFrenos (Boolean aviso){
         if (aviso)
             frenos.setForeground(Color.red);
         else
             frenos.setForeground(Color.black);
     }
+    
     public void avisoGeneral (Boolean aviso){
         if (aviso)
             revision.setForeground(Color.red);
         else
             revision.setForeground(Color.black);
+    }
+    
+    public void setNivelCombustible(Double nivel) {
+        nivelGasolina.setText(df1.format(nivel) + "%");
+    }
+    
+    public void setNivelAceite(Double nivel) {
+        nivelAceite.setText(df1.format(nivel) + "%");
+    }
+    
+    public void setNivelFrenos(Double nivel) {
+        nivelFreno.setText(df1.format(nivel) + "%");
+    }
+    
+    public void setEstadoGeneral(Double nivel) {
+        estadoGeneral.setText(df1.format(nivel) + "%");
+    }
+    
+    public void permutarMantenimiento(Boolean cambiar) {
+        repostar.setVisible(cambiar);
+        cambiarAceite.setVisible(cambiar);
+        cambiarFrenos.setVisible(cambiar);
+        revisionGeneral.setVisible(cambiar);
     }
     
     ////////////////////////////////////////////////////////////////////////////
@@ -125,6 +243,7 @@ public class Vista extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jProgressBarRPM = new javax.swing.JProgressBar();
         jLabelRPM = new javax.swing.JLabel();
+        etiquetaRpm = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -138,23 +257,27 @@ public class Vista extends javax.swing.JFrame {
         jLabelVelocidad = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        acelerarSCACV = new javax.swing.JToggleButton();
-        mantenerSCACV = new javax.swing.JToggleButton();
-        reiniciarSCACV = new javax.swing.JToggleButton();
-        apagadoSCACV = new javax.swing.JToggleButton();
         etiquetaCrucero = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         ultimaVelocidad = new javax.swing.JLabel();
+        acelerarSCACV = new javax.swing.JButton();
+        mantenerSCACV = new javax.swing.JButton();
+        reiniciarSCACV = new javax.swing.JButton();
+        apagadoSCACV = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         gasolina = new javax.swing.JLabel();
         frenos = new javax.swing.JLabel();
         aceite = new javax.swing.JLabel();
         revision = new javax.swing.JLabel();
-        Respostar = new javax.swing.JButton();
-        cambiaraceite = new javax.swing.JButton();
+        repostar = new javax.swing.JButton();
+        cambiarAceite = new javax.swing.JButton();
         cambiarFrenos = new javax.swing.JButton();
         revisionGeneral = new javax.swing.JButton();
+        nivelGasolina = new javax.swing.JLabel();
+        nivelAceite = new javax.swing.JLabel();
+        nivelFreno = new javax.swing.JLabel();
+        estadoGeneral = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(205, 255, 217));
@@ -189,11 +312,13 @@ public class Vista extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jProgressBarRPM.setMaximum(5000);
+        jProgressBarRPM.setMaximum(6000);
 
         jLabelRPM.setFont(new java.awt.Font("DejaVu Sans", 1, 24)); // NOI18N
         jLabelRPM.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelRPM.setText("RPM");
+
+        etiquetaRpm.setText("0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -205,15 +330,20 @@ public class Vista extends javax.swing.JFrame {
                         .addGap(36, 36, 36)
                         .addComponent(jProgressBarRPM, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(178, 178, 178)
-                        .addComponent(jLabelRPM, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(176, 176, 176)
+                        .addComponent(jLabelRPM, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(255, 255, 255)
+                        .addComponent(etiquetaRpm)))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addContainerGap()
                 .addComponent(jLabelRPM, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(etiquetaRpm)
                 .addGap(18, 18, 18)
                 .addComponent(jProgressBarRPM, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(37, Short.MAX_VALUE))
@@ -318,6 +448,14 @@ public class Vista extends javax.swing.JFrame {
 
         jLabel7.setText("SCACV");
 
+        etiquetaCrucero.setText("APAGADO");
+
+        jLabel13.setText("Velocidad guardada:");
+
+        jLabel14.setText("Estado:");
+
+        ultimaVelocidad.setText("No Hay");
+
         acelerarSCACV.setText("ACELERAR");
         acelerarSCACV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -339,39 +477,20 @@ public class Vista extends javax.swing.JFrame {
             }
         });
 
+        apagadoSCACV.setForeground(new java.awt.Color(255, 0, 0));
         apagadoSCACV.setText("APAGADO");
-        apagadoSCACV.setToolTipText("");
         apagadoSCACV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 apagadoSCACVActionPerformed(evt);
             }
         });
 
-        etiquetaCrucero.setText("estadoCrucero");
-
-        jLabel13.setText("Ultima velocidad guardada:");
-
-        jLabel14.setText("Estado:");
-
-        ultimaVelocidad.setText("km");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(mantenerSCACV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(reiniciarSCACV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(apagadoSCACV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(acelerarSCACV, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(93, 93, 93))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(jLabel7))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,7 +501,17 @@ public class Vista extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(ultimaVelocidad)))))
+                                .addComponent(ultimaVelocidad))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(mantenerSCACV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(reiniciarSCACV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(apagadoSCACV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(acelerarSCACV, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -396,9 +525,9 @@ public class Vista extends javax.swing.JFrame {
                 .addComponent(mantenerSCACV)
                 .addGap(18, 18, 18)
                 .addComponent(reiniciarSCACV)
-                .addGap(18, 18, 18)
+                .addGap(25, 25, 25)
                 .addComponent(apagadoSCACV)
-                .addGap(34, 34, 34)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etiquetaCrucero)
                     .addComponent(jLabel14))
@@ -423,22 +552,21 @@ public class Vista extends javax.swing.JFrame {
         revision.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         revision.setText("Revisión general");
 
-        Respostar.setText("Repostar");
-        Respostar.addActionListener(new java.awt.event.ActionListener() {
+        repostar.setText("Repostar");
+        repostar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RespostarActionPerformed(evt);
+                repostarActionPerformed(evt);
             }
         });
 
-        cambiaraceite.setText("Cambiar aceite");
-        cambiaraceite.addActionListener(new java.awt.event.ActionListener() {
+        cambiarAceite.setText("Cambiar aceite");
+        cambiarAceite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cambiaraceiteActionPerformed(evt);
+                cambiarAceiteActionPerformed(evt);
             }
         });
 
         cambiarFrenos.setText("Cambiar Frenos");
-        cambiarFrenos.setActionCommand("Cambiar Frenos");
         cambiarFrenos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cambiarFrenosActionPerformed(evt);
@@ -451,6 +579,14 @@ public class Vista extends javax.swing.JFrame {
                 revisionGeneralActionPerformed(evt);
             }
         });
+
+        nivelGasolina.setText("0%");
+
+        nivelAceite.setText("0%");
+
+        nivelFreno.setText("0%");
+
+        estadoGeneral.setText("0%");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -480,26 +616,33 @@ public class Vista extends javax.swing.JFrame {
                                 .addComponent(frenar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(44, Short.MAX_VALUE))
+                        .addContainerGap(52, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(110, 110, 110)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cambiarFrenos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Respostar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(frenos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(43, 43, 43)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cambiarFrenos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(repostar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(frenos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cambiarAceite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(revisionGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(revision))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(gasolina)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(8, 8, 8)
-                                        .addComponent(aceite))))
-                            .addComponent(revision, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cambiaraceite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(revisionGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(nivelFreno, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(estadoGeneral, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(aceite)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(nivelAceite))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(gasolina)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(nivelGasolina)))
+                        .addGap(17, 17, 17))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -523,22 +666,30 @@ public class Vista extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
-                        .addComponent(gasolina)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(gasolina)
+                            .addComponent(nivelGasolina))
                         .addGap(18, 18, 18)
-                        .addComponent(aceite)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(aceite)
+                            .addComponent(nivelAceite))
                         .addGap(18, 18, 18)
-                        .addComponent(frenos)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(frenos)
+                            .addComponent(nivelFreno))
                         .addGap(18, 18, 18)
-                        .addComponent(revision)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(revision)
+                            .addComponent(estadoGeneral))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Respostar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(repostar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(cambiaraceite, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cambiarAceite, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cambiarFrenos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -552,21 +703,19 @@ public class Vista extends javax.swing.JFrame {
     private void encenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encenderActionPerformed
         if (encender.isSelected()) {
             if (controlador.setEstadoMotor(EstadosMotor.ENCENDIDO)) {
-                encender.setText("APAGAR");
-                encender.setForeground(Color.red);
-                estado.setText("ENCENDIDO");
+                activarEncender();
+                desactivarAcelerador();
+                desactivarFreno();
             } else {
-                encender.setSelected(false);
+                desactivarEncender();
             }
         } else {
             if (controlador.setEstadoMotor(EstadosMotor.APAGADO)) {
-            estado.setText("APAGADO");
-            encender.setText("ENCENDER");
-            encender.setForeground(Color.green);
-            acelerar.setSelected(false);
-            frenar.setSelected(false);
+            desactivarEncender();
+            desactivarAcelerador();
+            desactivarFreno();
             } else {
-                encender.setSelected(true);
+                activarEncender();
             }
         }
 
@@ -578,20 +727,16 @@ public class Vista extends javax.swing.JFrame {
         if (encender.isSelected() && !frenar.isSelected()) {
             if (acelerar.isSelected()) {
                 if (encender.isSelected() && controlador.setEstadoMotor(EstadosMotor.ACELERANDO)) {
-                    acelerar.setText("Soltar acelerador");
-                    acelerar.setForeground(Color.red);
-                    estado.setText("ACELERANDO");   
+                    activarAcelerador();
                 } else {
-                    acelerar.setSelected(false);
+                    desactivarAcelerador();
                 }
 
             } else {
                 if (controlador.setEstadoMotor(EstadosMotor.ENCENDIDO)) {
-                    acelerar.setText("ACELERAR");
-                    acelerar.setForeground(Color.black);
-                    estado.setText("ENCENDIDO");
+                    desactivarAcelerador();
                 } else {
-                    acelerar.setSelected(true);
+                    activarAcelerador();
                 }
             }
 
@@ -604,20 +749,16 @@ public class Vista extends javax.swing.JFrame {
         if (encender.isSelected() && !acelerar.isSelected()) {
             if (frenar.isSelected()) {
                 if (encender.isSelected() && controlador.setEstadoMotor(EstadosMotor.FRENANDO)) {
-                    frenar.setText("Soltar freno");
-                    frenar.setForeground(Color.red);
-                    estado.setText("FRENANDO");
+                    activarFreno();
                 } else {
-                    frenar.setSelected(false);
+                    desactivarFreno();
                 }
 
             } else {
                 if (controlador.setEstadoMotor(EstadosMotor.ENCENDIDO)) {
-                    frenar.setText("FRENAR");
-                    frenar.setForeground(Color.black);
-                    estado.setText("ENCENDIDO");
+                    desactivarFreno();
                 } else {
-                    frenar.setSelected(false);
+                    activarFreno();
                 }
             }
 
@@ -626,37 +767,13 @@ public class Vista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_frenarActionPerformed
 
-    private void reiniciarSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarSCACVActionPerformed
-        controlador.setEstadoCrucero(EstadoCrucero.REINICIAR);
-        this.permutarColor(reiniciarSCACV);
-        // Cambiar etiquieta de estado
-    }//GEN-LAST:event_reiniciarSCACVActionPerformed
-
-    private void acelerarSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acelerarSCACVActionPerformed
-        controlador.setEstadoCrucero(EstadoCrucero.ACELERAR);
-        this.permutarColor(acelerarSCACV);
-        // Cambiar etiquieta de estado
-    }//GEN-LAST:event_acelerarSCACVActionPerformed
-
-    private void mantenerSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mantenerSCACVActionPerformed
-        controlador.setEstadoCrucero(EstadoCrucero.REINICIAR);
-        this.permutarColor(mantenerSCACV);
-        // Cambiar etiquieta de estado
-    }//GEN-LAST:event_mantenerSCACVActionPerformed
-
-    private void apagadoSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagadoSCACVActionPerformed
-        controlador.setEstadoCrucero(EstadoCrucero.APAGADO);
-        this.permutarColor(apagadoSCACV);
-        // Cambiar etiquieta de estado
-    }//GEN-LAST:event_apagadoSCACVActionPerformed
-
-    private void RespostarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RespostarActionPerformed
+    private void repostarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repostarActionPerformed
         controlador.repostar();
-    }//GEN-LAST:event_RespostarActionPerformed
+    }//GEN-LAST:event_repostarActionPerformed
 
-    private void cambiaraceiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiaraceiteActionPerformed
+    private void cambiarAceiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarAceiteActionPerformed
         controlador.cambiarAceite();
-    }//GEN-LAST:event_cambiaraceiteActionPerformed
+    }//GEN-LAST:event_cambiarAceiteActionPerformed
 
     private void cambiarFrenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarFrenosActionPerformed
         controlador.cambiarFrenos();
@@ -665,6 +782,22 @@ public class Vista extends javax.swing.JFrame {
     private void revisionGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_revisionGeneralActionPerformed
         controlador.hacerRevisionGeneral();
     }//GEN-LAST:event_revisionGeneralActionPerformed
+
+    private void acelerarSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acelerarSCACVActionPerformed
+        this.pulsarAcelerarSCACV(true);
+    }//GEN-LAST:event_acelerarSCACVActionPerformed
+
+    private void mantenerSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mantenerSCACVActionPerformed
+        this.pulsarMantenerSCACV(true);
+    }//GEN-LAST:event_mantenerSCACVActionPerformed
+
+    private void reiniciarSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarSCACVActionPerformed
+        this.pulsarReiniciarSCACV(true);
+    }//GEN-LAST:event_reiniciarSCACVActionPerformed
+
+    private void apagadoSCACVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagadoSCACVActionPerformed
+        this.pulsarApagadoSCACV(true);
+    }//GEN-LAST:event_apagadoSCACVActionPerformed
 
     /**
      * @param args the command line arguments
@@ -702,16 +835,17 @@ public class Vista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Respostar;
     private javax.swing.JLabel aceite;
     private javax.swing.JToggleButton acelerar;
-    private javax.swing.JToggleButton acelerarSCACV;
-    private javax.swing.JToggleButton apagadoSCACV;
+    private javax.swing.JButton acelerarSCACV;
+    private javax.swing.JButton apagadoSCACV;
+    private javax.swing.JButton cambiarAceite;
     private javax.swing.JButton cambiarFrenos;
-    private javax.swing.JButton cambiaraceite;
     private javax.swing.JToggleButton encender;
     private javax.swing.JLabel estado;
+    private javax.swing.JLabel estadoGeneral;
     private javax.swing.JLabel etiquetaCrucero;
+    private javax.swing.JLabel etiquetaRpm;
     private javax.swing.JToggleButton frenar;
     private javax.swing.JLabel frenos;
     private javax.swing.JLabel gasolina;
@@ -734,8 +868,12 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JProgressBar jProgressBarRPM;
-    private javax.swing.JToggleButton mantenerSCACV;
-    private javax.swing.JToggleButton reiniciarSCACV;
+    private javax.swing.JButton mantenerSCACV;
+    private javax.swing.JLabel nivelAceite;
+    private javax.swing.JLabel nivelFreno;
+    private javax.swing.JLabel nivelGasolina;
+    private javax.swing.JButton reiniciarSCACV;
+    private javax.swing.JButton repostar;
     private javax.swing.JLabel revision;
     private javax.swing.JButton revisionGeneral;
     private javax.swing.JLabel ultimaVelocidad;

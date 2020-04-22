@@ -57,31 +57,40 @@
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace pref="62" max="32767" attributes="0"/>
+                      <EmptySpace pref="69" max="32767" attributes="0"/>
                       <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="44" max="32767" attributes="0"/>
+                      <EmptySpace pref="52" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="cambiarFrenos" max="32767" attributes="0"/>
-                          <Component id="Respostar" max="32767" attributes="0"/>
-                          <Component id="frenos" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="cambiarFrenos" max="32767" attributes="0"/>
+                                  <Component id="repostar" max="32767" attributes="0"/>
+                                  <Component id="frenos" max="32767" attributes="0"/>
+                                  <Component id="cambiarAceite" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="revisionGeneral" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
+                                  <Component id="revision" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="53" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="gasolina" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                                      <Component id="aceite" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="nivelFreno" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="estadoGeneral" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="revision" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="cambiaraceite" alignment="0" max="32767" attributes="0"/>
-                          <Component id="revisionGeneral" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="aceite" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="nivelAceite" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="gasolina" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="nivelGasolina" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -113,15 +122,27 @@
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="gasolina" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="gasolina" min="-2" max="-2" attributes="0"/>
+                          <Component id="nivelGasolina" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="aceite" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="aceite" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="nivelAceite" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="frenos" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="frenos" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="nivelFreno" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="revision" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="revision" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="estadoGeneral" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="Respostar" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="repostar" min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -131,7 +152,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="cambiaraceite" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="cambiarAceite" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="cambiarFrenos" min="-2" pref="35" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -193,7 +214,7 @@
           </Border>
         </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Cursor Por defecto"/>
+          <Color id="Default Cursor"/>
         </Property>
       </Properties>
 
@@ -207,8 +228,12 @@
                           <Component id="jProgressBarRPM" min="-2" pref="440" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
                           <Component id="jLabelRPM" min="-2" pref="171" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="255" max="-2" attributes="0"/>
+                          <Component id="etiquetaRpm" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="62" max="32767" attributes="0"/>
@@ -218,8 +243,10 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelRPM" min="-2" pref="67" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  <Component id="etiquetaRpm" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jProgressBarRPM" min="-2" pref="72" max="-2" attributes="0"/>
                   <EmptySpace pref="37" max="32767" attributes="0"/>
@@ -230,7 +257,7 @@
       <SubComponents>
         <Component class="javax.swing.JProgressBar" name="jProgressBarRPM">
           <Properties>
-            <Property name="maximum" type="int" value="5000"/>
+            <Property name="maximum" type="int" value="6000"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelRPM">
@@ -240,6 +267,11 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="RPM"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="etiquetaRpm">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -419,22 +451,8 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="45" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="mantenerSCACV" max="32767" attributes="0"/>
-                      <Component id="reiniciarSCACV" alignment="0" max="32767" attributes="0"/>
-                      <Component id="apagadoSCACV" alignment="0" max="32767" attributes="0"/>
-                      <Component id="acelerarSCACV" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
-                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -448,6 +466,19 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="ultimaVelocidad" min="-2" max="-2" attributes="0"/>
                               </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="mantenerSCACV" max="32767" attributes="0"/>
+                              <Component id="reiniciarSCACV" alignment="1" max="32767" attributes="0"/>
+                              <Component id="apagadoSCACV" alignment="1" max="32767" attributes="0"/>
+                              <Component id="acelerarSCACV" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -466,9 +497,9 @@
                   <Component id="mantenerSCACV" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="reiniciarSCACV" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="apagadoSCACV" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="etiquetaCrucero" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -489,47 +520,14 @@
             <Property name="text" type="java.lang.String" value="SCACV"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="acelerarSCACV">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="ACELERAR"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="acelerarSCACVActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JToggleButton" name="mantenerSCACV">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="MANTENER"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mantenerSCACVActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JToggleButton" name="reiniciarSCACV">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="REINICIAR"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reiniciarSCACVActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JToggleButton" name="apagadoSCACV">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="APAGADO"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="apagadoSCACVActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="etiquetaCrucero">
           <Properties>
-            <Property name="text" type="java.lang.String" value="estadoCrucero"/>
+            <Property name="text" type="java.lang.String" value="APAGADO"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel13">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ultima velocidad guardada:"/>
+            <Property name="text" type="java.lang.String" value="Velocidad guardada:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel14">
@@ -539,8 +537,43 @@
         </Component>
         <Component class="javax.swing.JLabel" name="ultimaVelocidad">
           <Properties>
-            <Property name="text" type="java.lang.String" value="km"/>
+            <Property name="text" type="java.lang.String" value="No Hay"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="acelerarSCACV">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="ACELERAR"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="acelerarSCACVActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="mantenerSCACV">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="MANTENER"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mantenerSCACVActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="reiniciarSCACV">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="REINICIAR"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reiniciarSCACVActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="apagadoSCACV">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="APAGADO"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="apagadoSCACVActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -581,26 +614,25 @@
         <Property name="text" type="java.lang.String" value="Revisi&#xf3;n general"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="Respostar">
+    <Component class="javax.swing.JButton" name="repostar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Repostar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RespostarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="repostarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="cambiaraceite">
+    <Component class="javax.swing.JButton" name="cambiarAceite">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cambiar aceite"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cambiaraceiteActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cambiarAceiteActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cambiarFrenos">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cambiar Frenos"/>
-        <Property name="actionCommand" type="java.lang.String" value="Cambiar Frenos"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cambiarFrenosActionPerformed"/>
@@ -613,6 +645,26 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="revisionGeneralActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="nivelGasolina">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0%"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="nivelAceite">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0%"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="nivelFreno">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0%"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="estadoGeneral">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0%"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

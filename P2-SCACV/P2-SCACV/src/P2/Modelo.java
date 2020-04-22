@@ -14,7 +14,8 @@ public class Modelo {
     private ConsumoGeneral consumoGeneral;
     
     public Modelo() {
-        motor =              new Motor(0.015, 30);
+        motor =              new Motor(0.015, 10);
+        motor.setMaxRevoluciones(6000);
         controlCrucero =     new ControlCrucero();
         consumoCombustible = new ConsumoCombustible();
         consumoAceite =      new ConsumoAceite();
