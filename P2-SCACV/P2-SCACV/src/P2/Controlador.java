@@ -13,7 +13,7 @@ public class Controlador {
     private final int INCREVDEFECTO = 50;
     
     Modelo modelo;
-    Vista vista;
+    ventana vista;
     
     private Double kmh = 0d;
     private Double kmTotales = 0d;
@@ -34,7 +34,7 @@ public class Controlador {
     
     public Controlador() {
         modelo = new Modelo();
-        vista =  new Vista();
+        vista =  new ventana();
         vista.setControlador(this);
         
         bloqueoRevoluciones = modelo.getMotor().getFactorRozamiento();
