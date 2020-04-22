@@ -38,5 +38,8 @@ public abstract class Consumo {
         if (actualizar)
             actualizarNivel();
     }
+    public int getRpmTotales(){
+        return rpmTotales;
+    }
 
 }

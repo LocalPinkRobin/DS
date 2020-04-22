@@ -6,7 +6,7 @@
 package P2;
 
 public class Motor {
-    private final int MAXREVDEFECTO = 6000;
+    private final int MAXREVDEFECTO = 5000;
     
     private EstadosMotor estadoActual = EstadosMotor.APAGADO;
     private int revoluciones;
