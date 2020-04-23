@@ -38,7 +38,7 @@ public class ConsumoCombustible extends Consumo{
         if (incrementoRpm < 1)
             incrementoRpm = 1;
         
-        Double incremento = (incrementoRpm*0.3)*rpmActuales*(rpmActuales*0.1)*5*pow(10,-9);
+        Double incremento = (incrementoRpm*0.155)*rpmActuales*(rpmActuales*0.255)*8*pow(10,-9);
         combustible = ((combustible - incremento) >= 0) ? combustible - incremento : 0 ;
         actualizarNivel();
     }

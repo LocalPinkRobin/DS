@@ -14,7 +14,6 @@ public class Controlador {
     
     Modelo modelo;
     VistaPanel vista;
-    VentanaApplet ventana;
     
     private Double kmh = 0d;
     private Double kmTotales = 0d;
@@ -33,13 +32,10 @@ public class Controlador {
     private CalculoEstadisticas estadisticas;
     private GestionCrucero      crucero;
     
-    public Controlador() {
+    public Controlador(VistaPanel vista){
         modelo = new Modelo();
-        vista =  new VistaPanel();
-        vista.setControlador(this);
-        
-        ventana = new VentanaApplet();
-        ventana.add(vista);
+        this.vista =  vista;
+        this.vista.setControlador(this);
         
         bloqueoRevoluciones = modelo.getMotor().getFactorRozamiento();
         
@@ -52,8 +48,6 @@ public class Controlador {
     }
     
     public void ejecutar() {
-        ventana.init();
-        ventana.start();
         encendido.start();
         estadisticas.start();
         crucero.start();
@@ -89,8 +83,12 @@ public class Controlador {
         else
             vista.velGuardada(velGuardada);
         
-        ventana.repaint();
-        ventana.revalidate();
+        //ventana.repaint();
+        //ventana.revalidate();
+    }
+    
+    public VistaPanel getVista() {
+        return this.vista;
     }
     
     public void setIncrementoRevoluciones(int incremento) {

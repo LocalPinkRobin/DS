@@ -5,14 +5,21 @@
  */
 package P2;
 
+import javax.swing.JApplet;
+
 /**
  *
  * @author dario
  */
-public class VentanaApplet extends javax.swing.JApplet {
+public class VentanaApplet extends JApplet {
     
-    public static void main(String[] args) {
-        P2SCACV.main(args);
+    private VistaPanel vista;
+    private Controlador controlador;
+    
+    public VentanaApplet() {
+        vista = new VistaPanel();
+        controlador = new Controlador(vista);
+        this.add(vista);
     }
     
     /**
@@ -20,6 +27,9 @@ public class VentanaApplet extends javax.swing.JApplet {
      */
     @Override
     public void init() {
+        setSize(1400,840);
+        controlador.ejecutar();
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

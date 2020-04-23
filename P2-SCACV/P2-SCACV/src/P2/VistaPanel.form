@@ -406,6 +406,7 @@
         <Container class="eu.hansolo.steelseries.gauges.Radial" name="radial2">
           <Properties>
             <Property name="maxValue" type="double" value="5000.0"/>
+            <Property name="threshold" type="double" value="4000.0"/>
             <Property name="title" type="java.lang.String" value="Revoluciones"/>
             <Property name="unitString" type="java.lang.String" value="rpm"/>
           </Properties>
@@ -501,7 +502,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="27" max="32767" attributes="0"/>
+                  <EmptySpace pref="28" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -567,6 +568,8 @@
         </Container>
         <Container class="eu.hansolo.steelseries.gauges.Radial1Square" name="gasol">
           <Properties>
+            <Property name="threshold" type="double" value="20.0"/>
+            <Property name="thresholdBehaviourInverted" type="boolean" value="true"/>
             <Property name="title" type="java.lang.String" value="Gasolina"/>
           </Properties>
 

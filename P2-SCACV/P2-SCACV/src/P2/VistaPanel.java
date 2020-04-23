@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.*;
 
 /**
  *
@@ -442,6 +443,7 @@ public class VistaPanel extends javax.swing.JPanel {
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         radial2.setMaxValue(5000.0);
+        radial2.setThreshold(4000.0);
         radial2.setTitle("Revoluciones");
         radial2.setUnitString("rpm");
 
@@ -499,6 +501,8 @@ public class VistaPanel extends javax.swing.JPanel {
             .addGap(0, 35, Short.MAX_VALUE)
         );
 
+        gasol.setThreshold(20.0);
+        gasol.setThresholdBehaviourInverted(true);
         gasol.setTitle("Gasolina");
 
         javax.swing.GroupLayout gasolLayout = new javax.swing.GroupLayout(gasol);
@@ -587,7 +591,7 @@ public class VistaPanel extends javax.swing.JPanel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(jLabel5)))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jLabel8.setText("Motor:");
